@@ -3,6 +3,8 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
+const userRouter = require("../router/userRouter");
+
 // middleware to form our contract for incoming json payloads ONLY!!!
 app.use(express.json());
 
@@ -17,6 +19,7 @@ app.get("/", (req, res, next) => {
 });
 
 //routers
+app.use("/users", userRouter);
 
 // handling bad urls
 app.use((req, res, next) => {
