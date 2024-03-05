@@ -19,11 +19,20 @@ const disconnect = async () => {
 };
 
 const findUser = async (obj) => {
-  return await User.findOne(obj);
+  return await User.findOne(obj).exec();
 };
 
 const saveUser = async (newUser) => {
   return await newUser.save();
 };
 
-module.exports = { connect, disconnect, findUser, saveUser };
+const clearDatabase = async () => {
+  const collections = mongoose.connection.collections;
+
+  for (const key in collections) {
+    const collection = collections[key];
+    await collection.deleteMany({});
+  }
+};
+
+module.exports = { connect, disconnect, findUser, saveUser, clearDatabase };
