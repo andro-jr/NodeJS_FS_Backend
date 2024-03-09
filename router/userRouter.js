@@ -4,6 +4,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const User = require("../models/userModel");
 const mongoose = require("mongoose");
+const errorTemplate = require("../templates/errorTemplate");
 
 router.post("/register", async (req, res, next) => {
   try {
@@ -32,12 +33,7 @@ router.post("/register", async (req, res, next) => {
       });
     }
   } catch (err) {
-    return res.json({
-      error: {
-        message: err.message,
-        status: err.status,
-      },
-    });
+    return errorTemplate(res, err, "Error registering User");
   }
 });
 
