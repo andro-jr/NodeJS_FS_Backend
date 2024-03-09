@@ -23,7 +23,16 @@ const findUser = async (obj) => {
 };
 
 const saveUser = async (newUser) => {
-  return await newUser.save();
+  try {
+    const user = await newUser.save();
+    return { user };
+  } catch (err) {
+    const error = {
+      message: err.message,
+      status: err.status,
+    };
+    return { error };
+  }
 };
 
 const clearDatabase = async () => {
