@@ -23,7 +23,7 @@ exports.registerUser = async (req, res, next) => {
           if (error) throw new Error("Failed to register!");
           res
             .status(201)
-            .json({ message: " Successful Registration", user: dbUser });
+            .json({ message: "Successful Registration", user: dbUser });
         }
       });
     }
